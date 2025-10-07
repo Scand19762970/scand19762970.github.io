@@ -12,9 +12,9 @@ description: "bluearchive"
 #
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: https://github.com/Scand19762970/scand19762970.github.io/blob/5708d13a46f0cf84594be0eb4e9130f3a7eb5269/images/resized-image.jpg
+avatar: 'https://github.com/Scand19762970/scand19762970.github.io/blob/5708d13a46f0cf84594be0eb4e9130f3a7eb5269/images/resized-image.jpg'
 # 你的favicon（出现在浏览器tab上）图片URL，建议使用较小(64px × 64px)的图片
-favicon: https://github.com/Scand19762970/scand19762970.github.io/blob/5708d13a46f0cf84594be0eb4e9130f3a7eb5269/images/resized-image.jpg
+favicon: 'https://github.com/Scand19762970/scand19762970.github.io/blob/5708d13a46f0cf84594be0eb4e9130f3a7eb5269/images/resized-image.jpg'
 
 # Tabs in header. There are 'Blog', 'About', 'Archive', 'Tags'
 # and URL Link(e.g. 'Theme' tab below) tabs. If you don't need one, just delete
