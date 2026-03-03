@@ -1,0 +1,79 @@
+// js/ai-assistant.js
+// 你的Worker地址（替换成你自己的）
+const WORKER_URL = 'https://zjsm.dpdns.org';
+
+// 切换AI助手显示/隐藏
+function toggleAI() {
+    const content = document.getElementById('aiContent');
+    const toggle = document.querySelector('.ai-toggle');
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        toggle.textContent = '▼';
+    } else {
+        content.style.display = 'none';
+        toggle.textContent = '▶';
+    }
+}
+
+// 发送消息到AI
+async function sendToAI() {
+    const input = document.getElementById('aiPrompt');
+    const prompt = input.value.trim();
+    if (!prompt) return;
+
+    // 添加用户消息
+    const messagesDiv = document.getElementById('aiMessages');
+    messagesDiv.innerHTML += `<div class="ai-message user">${escapeHtml(prompt)}</div>`;
+    
+    // 清空输入框
+    input.value = '';
+
+    // 显示"正在输入"
+    messagesDiv.innerHTML += `<div class="ai-message assistant" id="thinking">...</div>`;
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    try {
+        // 调用Worker
+        const response = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: prompt })
+        });
+
+        const data = await response.json();
+        
+        // 移除"正在输入"
+        document.getElementById('thinking')?.remove();
+        
+        // 添加AI回复
+        if (data.response) {
+            messagesDiv.innerHTML += `<div class="ai-message assistant">${escapeHtml(data.response)}</div>`;
+        } else if (data.error) {
+            messagesDiv.innerHTML += `<div class="ai-message assistant" style="color: red;">错误：${escapeHtml(data.error)}</div>`;
+        }
+        
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    } catch (error) {
+        document.getElementById('thinking')?.remove();
+        messagesDiv.innerHTML += `<div class="ai-message assistant" style="color: red;">网络错误：${escapeHtml(error.message)}</div>`;
+    }
+}
+
+// HTML转义
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+// 按回车发送
+document.addEventListener('DOMContentLoaded', function() {
+    const input = document.getElementById('aiPrompt');
+    if (input) {
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendToAI();
+            }
+        });
+    }
+});
