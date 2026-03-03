@@ -1,0 +1,16 @@
+<!-- _includes/ai-assistant.html -->
+<div class="ai-assistant">
+    <div class="ai-header" onclick="toggleAI()">
+        <h3>Google Gemma2</h3>
+        <span class="ai-toggle">▼</span>
+    </div>
+    <div class="ai-content" id="aiContent">
+        <div class="ai-messages" id="aiMessages">
+            <div class="ai-message system">我由 Google DeepMind 的 Gemma 團隊開發。有什么可以帮你的？</div>
+        </div>
+        <div class="ai-input-area">
+            <input type="text" id="aiPrompt" placeholder="输入你的问题..." class="ai-input">
+            <button onclick="sendToAI()" class="ai-button">发送</button>
+        </div>
+    </div>
+</div>
