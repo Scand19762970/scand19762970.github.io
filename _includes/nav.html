@@ -27,3 +27,30 @@
     </footer>
   </div>
 </div>
+ <div class="sidebar-ai">
+    <div class="ai-header" onclick="toggleAIChat()">
+      <span class="ai-icon"></span>
+      <span class="ai-title">AI 助手</span>
+      <span class="ai-toggle">▼</span>
+    </div>
+    <div class="ai-chat" id="aiChat">
+      <div class="ai-messages" id="aiMessages">
+        <div class="ai-message system">你好，有什么可以帮你？</div>
+      </div>
+      <div class="ai-input-area">
+        <input type="text" id="aiPrompt" placeholder="输入问题...">
+        <button onclick="sendToAI()">发送</button>
+      </div>
+    </div>
+  </div>
+  <!-- AI 助手结束 -->
+
+  <div class="wrapper-footer-desktop">
+    <footer class="footer">
+    {% include footer.html %}
+    </footer>
+  </div>
+</div>
+
+<!-- 引入 JavaScript -->
+<script src="{{ '/js/ai-assistant.js' | relative_url }}"></script>
